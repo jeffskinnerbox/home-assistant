@@ -1,0 +1,21 @@
+#
+# To start this docker container
+# sudo NR_PORT=1880 NR_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./nodered-docker-compose.yml up -d
+#
+
+
+version: '3'
+services:
+  nodered:
+    container_name: node-red
+    image: nodered/node-red:latest
+    restart: unless-stopped
+    ports:
+      - ${NR_PORT}:1880
+    environment:
+      TZ: "America/NewYork"       # set time zone
+    volumes:
+      - ${NR_HOME}/node-red:/data
+    #depends_on:
+      #- homeassistant
+      #- mosquitto

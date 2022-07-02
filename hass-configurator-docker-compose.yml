@@ -1,0 +1,21 @@
+#
+# To start this docker container
+# sudo HC_PORT=3218 HC_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./hass-configurator-docker-compose.yml up -d
+#
+
+
+version: '3'
+services:
+  hass-configurator:
+    #image: causticlab/hass-configurator-docker:arm          # for raspberry pi
+    image: causticlab/hass-configurator-docker:latest       # for linux
+    container_name: hass-configurator
+    restart: unless-stopped
+    user: 1000:1000
+    ports:
+      - ${HC_PORT}:3218/tcp
+    volumes:
+      - ${HC_HOME}/hass-configurator/configurator-config:/config
+      - ${HC_HOME}/hass-configurator/hass-config:/hass-config
+    #depends_on:
+      #- homeassistant

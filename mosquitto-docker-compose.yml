@@ -1,0 +1,25 @@
+#
+# To start this docker container
+# sudo MQ_PORT=1883 MQ_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./mosquitto-docker-compose.yml up -d
+#
+
+
+version: '3'
+services:
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    #user: ${PUID}:${PGID}
+    user: "1000:1000"
+    restart: unless-stopped
+    ports:
+      - ${MQ_PORT}:1883
+      - 1884:1884
+    volumes:
+      - ${MQ_HOME}/mosquitto/config:/mosquitto/config
+      - ${MQ_HOME}/mosquitto/data:/mosquitto/data
+      - ${MQ_HOME}/mosquitto/log:/mosquitto/log
+    environment:
+      TZ: America/NewYork       # set time zone
+
+

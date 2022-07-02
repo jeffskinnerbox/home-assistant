@@ -1,0 +1,33 @@
+#
+# To start this docker container
+# sudo MDB_PORT=3306 AD_PORT=8080 MYSQL_ROOT_PASSWORD='password' MYSQL_PASSWORD='password' MDB_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./mariadb-docker-compose.yml up -d
+#
+
+
+version: '3'
+services:
+  mariadb:
+    image: mariadb
+    container_name: mariadb
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+      MYSQL_USER: homeassistant
+      MYSQL_DATABASE: ha_db
+      PUID: 1000
+      PGID: 1000
+    volumes:
+      - ${MDB_HOME}/mariadb/config:/config
+    ports:
+      - ${MDB_PORT}:3306
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: unless-stopped
+    ports:
+      - ${AD_PORT}:8080
+    depends_on:
+      - mariadb
+
