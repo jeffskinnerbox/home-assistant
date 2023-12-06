@@ -1,6 +1,6 @@
 #
 # To start this docker container
-# sudo MQ_PORT=1883 MQ_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./mosquitto-docker-compose.yml up -d
+# sudo MQ_PORT=1883 MQ_HOME='/home/pi/src/docker-containers/home-assistant' docker-compose --file ./mosquitto-docker-compose.yml up -d
 #
 
 

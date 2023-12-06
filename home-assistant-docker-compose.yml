@@ -6,32 +6,32 @@
 # http://<ip of your server>:<port>, in my cased http://192.168.1.200:8123
 #
 # To start this docker container
-# sudo HA_PORT=8123 HA_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./homeassistant-docker-compose.yml up -d
+# sudo HA_PORT=8123 HA_HOME='/home/pi/src/docker-containers/home-assistant' docker-compose --file ./home-assistant-docker-compose.yml up -d
 #
 
 
 version: '3'
 services:
-  homeassistant:
+  home-assistant:
     container_name: home-assistant
-    image: "ghcr.io/home-assistant/home-assistant:stable"
+    image: "lscr.io/linuxserver/homeassistant:latest"
     restart: unless-stopped
-    privileged: true
-    #network_mode: host   # shares host networking with container, enables device discovery (zeroconf/mDNS and UPnP devices)
-    #devices:
-      #- /dev/ttyUSB0:/dev/ttyUSB0
-      #- /dev/ttyUSB1:/dev/ttyUSB1
-      #- /dev/ttyACM0:/dev/ttyACM0
-    ports:
-      - ${HA_PORT}:8123                    # port to access webui
+    privileged: true     # true give root privliges to all devices
+    network_mode: host   # shares host networking with container, enables device discovery (zeroconf/mDNS and UPnP devices)
+    #ports:
+      #- ${HA_PORT}:8123                    # port to access webui
     environment:
       - PUID=1000                          # user id
       - PGID=1000                          # group id
       - TZ="America/NewYork"               # set time zone
     volumes:
-      - ${HA_HOME}/home-assistant/config:/config          # home assistant config storage path
-      - ${HA_HOME}/home-assistant/shared:/shared
+      - ${HA_HOME}/config:/config          # home assistant config storage path
+      - ${HA_HOME}/shared:/shared
       - /etc/localtime:/etc/localtime:ro   # sets containers time
+    #devices:
+      #- /dev/ttyUSB0:/dev/ttyUSB0
+      #- /dev/ttyUSB1:/dev/ttyUSB1
+      #- /dev/ttyACM0:/dev/ttyACM0
     #depends_on:
       #- mariadb
       #- mosquitto

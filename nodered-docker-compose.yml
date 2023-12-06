@@ -1,6 +1,6 @@
 #
 # To start this docker container
-# sudo NR_PORT=1880 NR_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./nodered-docker-compose.yml up -d
+# sudo NR_PORT=1880 NR_HOME='/home/pi/src/docker-containers/home-assistant' docker-compose --file ./nodered-docker-compose.yml up -d
 #
 
 

@@ -1,6 +1,8 @@
 #
+#The HASS-Configurator is a small webapp (you access it via web browser) that provides a filesystem-browser and text-editor to modify files on the machine the configurator is running on. It has been created to allow easy configuration of Home Assistant. It is powered by Ace editor, which supports syntax highlighting for various code/markup languages. YAML files (the default language for Home Assistant configuration files) will be automatically checked for syntax errors while editing.
+#
 # To start this docker container
-# sudo HC_PORT=3218 HC_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./hass-configurator-docker-compose.yml up -d
+# sudo HC_PORT=3218 HC_HOME='/home/pi/src/docker-containers/home-assistant' docker-compose --file ./hass-configurator-docker-compose.yml up -d
 #
 
 
@@ -12,10 +14,12 @@ services:
     container_name: hass-configurator
     restart: unless-stopped
     user: 1000:1000
+    networks:
+      - hass-network
     ports:
       - ${HC_PORT}:3218/tcp
     volumes:
-      - ${HC_HOME}/hass-configurator/configurator-config:/config
+      - ${HC_HOME}/hass-configurator/config:/config
       - ${HC_HOME}/hass-configurator/hass-config:/hass-config
     #depends_on:
       #- homeassistant

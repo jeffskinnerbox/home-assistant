@@ -1,6 +1,6 @@
 #
 # To start this docker container
-# sudo MDB_PORT=3306 AD_PORT=8080 MYSQL_ROOT_PASSWORD='password' MYSQL_PASSWORD='password' MDB_HOME='/home/jeff/src/docker-containers/home-assistant' docker-compose --file ./mariadb-docker-compose.yml up -d
+# sudo MDB_PORT=3306 AD_PORT=8080 MYSQL_ROOT_PASSWORD='password' MYSQL_PASSWORD='password' MDB_HOME='/home/pi/src/docker-containers/home-assistant' docker-compose --file ./mariadb-docker-compose.yml up -d
 #
 
 
